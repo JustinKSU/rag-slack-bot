@@ -20,12 +20,14 @@ import lombok.extern.slf4j.Slf4j;
 public class SlackService {
 
     private final ChatRagService chatRagService;
+    private final Slack slackApi;
 
     @Value("${slack.bot-token}")
     private String slackBotToken;
 
-    public SlackService(ChatRagService chatRagService) {
+    public SlackService(ChatRagService chatRagService, Slack slackApi) {
         this.chatRagService = chatRagService;
+        this.slackApi = slackApi;
     }
 
     @Async
@@ -73,8 +75,8 @@ public class SlackService {
     }
 
     private String getChannelName(String channelId) throws IOException, SlackApiException {
-        Slack slack = Slack.getInstance();
-        var response = slack.methods(slackBotToken)
+
+        var response = slackApi.methods(slackBotToken)
                 .conversationsInfo(ConversationsInfoRequest.builder()
                         .channel(channelId)
                         .build());
@@ -87,10 +89,8 @@ public class SlackService {
     }
 
     private void sendMessage(String channel, String threadTs, String message) {
-        Slack slack = Slack.getInstance();
-
         try {
-            var response = slack.methods(slackBotToken)
+            var response = slackApi.methods(slackBotToken)
                     .chatPostMessage(ChatPostMessageRequest.builder()
                             .channel(channel)
                             .text(message)
