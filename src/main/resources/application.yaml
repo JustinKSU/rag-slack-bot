@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: rag-slack-bot
+
+  ai:
+    openai:
+      embedding:
+        options:
+          model: text-embedding-3-small
+
+  servlet:
+    multipart:
+      max-file-size: 50MB        # Maximum file size
+      max-request-size: 50MB     # Maximum request size
+      file-size-threshold: 2KB   # Threshold for writing to disk
+      location: /tmp             # Temporary location for uploaded files
+
+logging:
+  level:
+    '[org.springframework.ai]': DEBUG
+    '[org.springframework.ai.vectorstore]': DEBUG
+
+chroma-db:
+  host: http://localhost
+  port: 8000
+  # key-token: <your access token (if configure)>
+  # username: <your username (if configure)>
+  # password: <your password (if configure)>
+  tenant-name: default_tenant
+  database-name: default_database
+  collections:
+    minnkota:
+      prompt-refinements: Terrova-QUEST
+      # initialize-schema: false
+    employeehandbook:
+      prompt-refinements: keyhole
+      # initialize-schema: false

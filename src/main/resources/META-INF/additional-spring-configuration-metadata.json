@@ -1,0 +1,94 @@
+{
+    "properties": [
+        {
+            "name": "slack.bot-token",
+            "type": "java.lang.String",
+            "description": "A description for 'slack.bot-token'"
+        },
+        {
+            "name": "chroma-db.host",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.host'"
+        },
+        {
+            "name": "chroma-db.port",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.port'"
+        },
+        {
+            "name": "chroma-db.tenant-name",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.tenant-name'"
+        },
+        {
+            "name": "chroma-db.database-name",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.database-name'"
+        },
+        {
+            "name": "chroma-db.stores.minnkota.collection-name",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.stores.minnkota.collection-name'"
+        },
+        {
+            "name": "chroma-db.stores.minnkota.prompt-refinements",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.stores.minnkota.prompt-refinements'"
+        },
+        {
+            "name": "chroma-db.stores.employeehandbook.collection-name",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.stores.employeehandbook.collection-name'"
+        },
+        {
+            "name": "chroma-db.stores.employeehandbook.prompt-refinements",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.stores.employeehandbook.prompt-refinements'"
+        },
+        {
+            "name": "chroma-db.stores.employeehandbook.initialize-schema",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.stores.employeehandbook.initialize-schema'"
+        },
+        {
+            "name": "chroma-db.stores.minnkota.initialize-schema",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.stores.minnkota.initialize-schema'"
+        },
+        {
+            "name": "chroma-db.key-token",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.key-token'"
+        },
+        {
+            "name": "chroma-db.username",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.username'"
+        },
+        {
+            "name": "chroma-db.password",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.password'"
+        },
+        {
+            "name": "chroma-db.collections.minnkota.prompt-refinements",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.collections.minnkota.prompt-refinements'"
+        },
+        {
+            "name": "chroma-db.collections.employeehandbook.prompt-refinements",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.collections.employeehandbook.prompt-refinements'"
+        },
+        {
+            "name": "chroma-db.collections.employeehandbook.initialize-schema",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.collections.employeehandbook.initialize-schema'"
+        },
+        {
+            "name": "chroma-db.collections.minnkota.initialize-schema",
+            "type": "java.lang.String",
+            "description": "A description for 'chroma-db.collections.minnkota.initialize-schema'"
+        }
+    ]
+}

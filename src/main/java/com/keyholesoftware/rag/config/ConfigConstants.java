@@ -1,0 +1,8 @@
+package com.keyholesoftware.rag.config;
+
+public interface ConfigConstants {
+    public static final String MINNKOTA = "minnkota";
+    public static final String EMPLOYEE_HANDBOOK = "employeehandbook";
+    public static final String VECTOR_STORE_MAP = "vectorStoreMap";
+    public static final String ADVISORS_MAP = "advisorsMap";
+}
