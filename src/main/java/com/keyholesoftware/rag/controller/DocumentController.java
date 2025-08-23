@@ -21,6 +21,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @RestController
 @RequestMapping("/api/documents")
@@ -49,14 +51,15 @@ public class DocumentController {
         }
     }
 
-    @PostMapping("/upload")
+    @PostMapping(value = "/upload", consumes = "multipart/form-data")
     @Operation(summary = "Upload and process a PDF document into a specified collection")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful response"),
             @ApiResponse(responseCode = "400", description = "Invalid input"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    public ResponseEntity<String> uploadPdf(@RequestParam("file") MultipartFile file,
+    public ResponseEntity<String> uploadPdf(
+            @io.swagger.v3.oas.annotations.Parameter(description = "PDF file to upload", content = @Content(mediaType = "application/pdf", schema = @Schema(type = "string", format = "binary"))) @RequestParam("file") MultipartFile file,
             @RequestParam String collection) {
         try {
             // Convert MultipartFile to Resource

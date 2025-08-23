@@ -31,7 +31,7 @@ chroma-db:
   collections:
     minnkota:
       prompt-refinements: Terrova-QUEST
-      # initialize-schema: false
+      initialize-schema: true
     employeehandbook:
       prompt-refinements: keyhole
-      # initialize-schema: false
+      initialize-schema: true
