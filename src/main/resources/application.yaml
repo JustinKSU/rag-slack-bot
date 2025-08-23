@@ -3,7 +3,7 @@ spring:
     name: rag-slack-bot
 
   ai:
-    openai:
+    openai: # USING OPEN AI - AUTO CONFIGURATION
       embedding:
         options:
           model: text-embedding-3-small
