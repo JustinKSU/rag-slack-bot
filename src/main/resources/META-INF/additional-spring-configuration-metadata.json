@@ -26,14 +26,14 @@
             "description": "A description for 'chroma-db.database-name'"
         },
         {
-            "name": "chroma-db.stores.minnkota.collection-name",
+            "name": "chroma-db.stores.AI.collection-name",
             "type": "java.lang.String",
-            "description": "A description for 'chroma-db.stores.minnkota.collection-name'"
+            "description": "A description for 'chroma-db.stores.AI.collection-name'"
         },
         {
-            "name": "chroma-db.stores.minnkota.prompt-refinements",
+            "name": "chroma-db.stores.openai.prompt-refinements",
             "type": "java.lang.String",
-            "description": "A description for 'chroma-db.stores.minnkota.prompt-refinements'"
+            "description": "A description for 'chroma-db.stores.openai.prompt-refinements'"
         },
         {
             "name": "chroma-db.stores.employeehandbook.collection-name",
@@ -51,9 +51,9 @@
             "description": "A description for 'chroma-db.stores.employeehandbook.initialize-schema'"
         },
         {
-            "name": "chroma-db.stores.minnkota.initialize-schema",
+            "name": "chroma-db.stores.openai.initialize-schema",
             "type": "java.lang.String",
-            "description": "A description for 'chroma-db.stores.minnkota.initialize-schema'"
+            "description": "A description for 'chroma-db.stores.openai.initialize-schema'"
         },
         {
             "name": "chroma-db.key-token",
@@ -71,9 +71,9 @@
             "description": "A description for 'chroma-db.password'"
         },
         {
-            "name": "chroma-db.collections.minnkota.prompt-refinements",
+            "name": "chroma-db.collections.openai.prompt-refinements",
             "type": "java.lang.String",
-            "description": "A description for 'chroma-db.collections.minnkota.prompt-refinements'"
+            "description": "A description for 'chroma-db.collections.openai.prompt-refinements'"
         },
         {
             "name": "chroma-db.collections.employeehandbook.prompt-refinements",
@@ -86,9 +86,9 @@
             "description": "A description for 'chroma-db.collections.employeehandbook.initialize-schema'"
         },
         {
-            "name": "chroma-db.collections.minnkota.initialize-schema",
+            "name": "chroma-db.collections.openai.initialize-schema",
             "type": "java.lang.String",
-            "description": "A description for 'chroma-db.collections.minnkota.initialize-schema'"
+            "description": "A description for 'chroma-db.collections.openai.initialize-schema'"
         }
     ]
 }

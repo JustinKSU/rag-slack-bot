@@ -23,15 +23,16 @@ logging:
 chroma-db:
   host: http://localhost
   port: 8000
+  initializeSchema: true
   # key-token: <your access token (if configure)>
   # username: <your username (if configure)>
   # password: <your password (if configure)>
   tenant-name: default_tenant
   database-name: default_database
   collections:
-    minnkota:
-      prompt-refinements: Terrova-QUEST
-      # initialize-schema: false
+    openao:
+      prompt-refinements: OPENAI
+      initializeSchema: true
     employeehandbook:
       prompt-refinements: keyhole
-      # initialize-schema: false
+      initializeSchema: true

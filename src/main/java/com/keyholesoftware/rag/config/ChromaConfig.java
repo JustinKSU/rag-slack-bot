@@ -38,16 +38,16 @@ public class ChromaConfig {
         }
 
         @Bean
-        @Qualifier(MINNKOTA)
-        public ChromaVectorStore minnkotaVectorStore(ChromaApi chromaApi, EmbeddingModel embeddingModel,
+        @Qualifier(OPENAI)
+        public ChromaVectorStore AIVectorStore(ChromaApi chromaApi, EmbeddingModel embeddingModel,
                         ObjectProvider<ObservationRegistry> observationRegistry,
                         ObjectProvider<VectorStoreObservationConvention> customObservationConvention,
                         BatchingStrategy chromaBatchingStrategy) {
                 return ChromaVectorStore.builder(chromaApi, embeddingModel)
                                 .tenantName(chromaProperties.getTenantName())
                                 .databaseName(chromaProperties.getDatabaseName())
-                                .collectionName(MINNKOTA)
-                                .initializeSchema(false)
+                                .collectionName(OPENAI)
+                                .initializeSchema(true)
                                 .observationRegistry(observationRegistry.getIfUnique(() -> ObservationRegistry.NOOP))
                                 .customObservationConvention(customObservationConvention.getIfAvailable(() -> null))
                                 .batchingStrategy(chromaBatchingStrategy)
@@ -64,7 +64,7 @@ public class ChromaConfig {
                                 .tenantName(chromaProperties.getTenantName())
                                 .databaseName(chromaProperties.getDatabaseName())
                                 .collectionName(EMPLOYEE_HANDBOOK)
-                                .initializeSchema(false)
+                                .initializeSchema(true)
                                 .observationRegistry(observationRegistry.getIfUnique(() -> ObservationRegistry.NOOP))
                                 .customObservationConvention(customObservationConvention.getIfAvailable(() -> null))
                                 .batchingStrategy(chromaBatchingStrategy)
@@ -74,16 +74,16 @@ public class ChromaConfig {
         @Bean
         @Qualifier(VECTOR_STORE_MAP)
         public Map<String, VectorStore> vectorStoreMap(
-                        @Qualifier(MINNKOTA) ChromaVectorStore minnkotaStore,
+                        @Qualifier(OPENAI) ChromaVectorStore AIStore,
                         @Qualifier(EMPLOYEE_HANDBOOK) ChromaVectorStore employeeHandbookStore) {
                 return Map.of(
-                                MINNKOTA, minnkotaStore,
+                        OPENAI, AIStore,
                                 EMPLOYEE_HANDBOOK, employeeHandbookStore);
         }
 
         @Bean
-        @Qualifier(MINNKOTA)
-        public QuestionAnswerAdvisor minnkotaAdvisor(@Qualifier(MINNKOTA) ChromaVectorStore vectorStore) {
+        @Qualifier(OPENAI)
+        public QuestionAnswerAdvisor aiAdvisor(@Qualifier(OPENAI) ChromaVectorStore vectorStore) {
                 return QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
                                                 .similarityThreshold(0d)
@@ -107,10 +107,10 @@ public class ChromaConfig {
         @Bean
         @Qualifier(ADVISORS_MAP)
         public Map<String, QuestionAnswerAdvisor> questionAnswerAdvisorMap(
-                        @Qualifier(MINNKOTA) QuestionAnswerAdvisor minnkotaAdvisor,
+                        @Qualifier(OPENAI) QuestionAnswerAdvisor AIAdvisor,
                         @Qualifier(EMPLOYEE_HANDBOOK) QuestionAnswerAdvisor employeeHandbookAdvisor) {
                 return Map.of(
-                                MINNKOTA, minnkotaAdvisor,
+                        OPENAI, AIAdvisor,
                                 EMPLOYEE_HANDBOOK, employeeHandbookAdvisor);
         }
 }
