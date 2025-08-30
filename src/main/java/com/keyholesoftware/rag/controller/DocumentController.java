@@ -17,8 +17,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.keyholesoftware.rag.service.PdfEmbeddingService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @RestController
 @RequestMapping("/api/documents")
+@Tag(name = "Embedding API", description = "Endpoints for managing embedded documents and collections")
 public class DocumentController {
 
     private final PdfEmbeddingService pdfEmbeddingService;
@@ -28,6 +36,12 @@ public class DocumentController {
     }
 
     @GetMapping("/collections")
+    @Operation(summary = "List the collections available in the vector store")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     public ResponseEntity<List<String>> listCollections() {
         try {
             List<String> collections = pdfEmbeddingService.listCollections();
@@ -37,8 +51,15 @@ public class DocumentController {
         }
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<String> uploadPdf(@RequestParam("file") MultipartFile file,
+    @PostMapping(value = "/upload", consumes = "multipart/form-data")
+    @Operation(summary = "Upload and process a PDF document into a specified collection")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    public ResponseEntity<String> uploadPdf(
+            @io.swagger.v3.oas.annotations.Parameter(description = "PDF file to upload", content = @Content(mediaType = "application/pdf", schema = @Schema(type = "string", format = "binary"))) @RequestParam("file") MultipartFile file,
             @RequestParam String collection) {
         try {
             // Convert MultipartFile to Resource
@@ -58,6 +79,12 @@ public class DocumentController {
     }
 
     @GetMapping("/search")
+    @Operation(summary = "Search for similar documents in a collection")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     public ResponseEntity<List<Document>> search(
             @RequestParam String collection,
             @RequestParam String query,
@@ -69,6 +96,12 @@ public class DocumentController {
     }
 
     @DeleteMapping("/clear/{collectionName}")
+    @Operation(summary = "Delete all documents from a specific collection")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     public ResponseEntity<String> clearCollection(@PathVariable String collectionName) {
         try {
             pdfEmbeddingService.clearSpecificCollection(collectionName);

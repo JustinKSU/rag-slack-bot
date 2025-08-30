@@ -14,8 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.keyholesoftware.rag.service.SlackService;
 import com.slack.api.methods.SlackApiException;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/slack/events")
+@Tag(name = "Slack API", description = "Endpoints for responding to Slack events")
 public class SlackAPI {
 
     private final SlackService slackService;
@@ -25,6 +31,12 @@ public class SlackAPI {
     }
 
     @PostMapping
+    @Operation(summary = "Handle incoming Slack events")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     public ResponseEntity<?> handleSlackEvent(@RequestBody Map<String, Object> slackEventPayload)
             throws IOException, SlackApiException {
         String type = (String) slackEventPayload.get(TYPE);
