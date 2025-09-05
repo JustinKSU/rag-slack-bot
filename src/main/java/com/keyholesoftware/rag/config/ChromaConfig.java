@@ -38,16 +38,16 @@ public class ChromaConfig {
         }
 
         @Bean
-        @Qualifier(OPENAI)
-        public ChromaVectorStore AIVectorStore(ChromaApi chromaApi, EmbeddingModel embeddingModel,
+        @Qualifier(MINNKOTA)
+        public ChromaVectorStore minnkotaVectorStore(ChromaApi chromaApi, EmbeddingModel embeddingModel,
                         ObjectProvider<ObservationRegistry> observationRegistry,
                         ObjectProvider<VectorStoreObservationConvention> customObservationConvention,
                         BatchingStrategy chromaBatchingStrategy) {
                 return ChromaVectorStore.builder(chromaApi, embeddingModel)
                                 .tenantName(chromaProperties.getTenantName())
                                 .databaseName(chromaProperties.getDatabaseName())
-                                .collectionName(OPENAI)
-                                .initializeSchema(true)
+                                .collectionName(MINNKOTA)
+                                .initializeSchema(chromaProperties.getCollections().get(MINNKOTA).isInitializeSchema())
                                 .observationRegistry(observationRegistry.getIfUnique(() -> ObservationRegistry.NOOP))
                                 .customObservationConvention(customObservationConvention.getIfAvailable(() -> null))
                                 .batchingStrategy(chromaBatchingStrategy)
@@ -64,7 +64,8 @@ public class ChromaConfig {
                                 .tenantName(chromaProperties.getTenantName())
                                 .databaseName(chromaProperties.getDatabaseName())
                                 .collectionName(EMPLOYEE_HANDBOOK)
-                                .initializeSchema(true)
+                                .initializeSchema(chromaProperties.getCollections().get(EMPLOYEE_HANDBOOK)
+                                                .isInitializeSchema())
                                 .observationRegistry(observationRegistry.getIfUnique(() -> ObservationRegistry.NOOP))
                                 .customObservationConvention(customObservationConvention.getIfAvailable(() -> null))
                                 .batchingStrategy(chromaBatchingStrategy)
@@ -74,16 +75,16 @@ public class ChromaConfig {
         @Bean
         @Qualifier(VECTOR_STORE_MAP)
         public Map<String, VectorStore> vectorStoreMap(
-                        @Qualifier(OPENAI) ChromaVectorStore AIStore,
+                        @Qualifier(MINNKOTA) ChromaVectorStore minnkotaStore,
                         @Qualifier(EMPLOYEE_HANDBOOK) ChromaVectorStore employeeHandbookStore) {
                 return Map.of(
-                        OPENAI, AIStore,
+                                MINNKOTA, minnkotaStore,
                                 EMPLOYEE_HANDBOOK, employeeHandbookStore);
         }
 
         @Bean
-        @Qualifier(OPENAI)
-        public QuestionAnswerAdvisor aiAdvisor(@Qualifier(OPENAI) ChromaVectorStore vectorStore) {
+        @Qualifier(MINNKOTA)
+        public QuestionAnswerAdvisor minnkotaAdvisor(@Qualifier(MINNKOTA) ChromaVectorStore vectorStore) {
                 return QuestionAnswerAdvisor.builder(vectorStore)
                                 .searchRequest(SearchRequest.builder()
                                                 .similarityThreshold(0d)
@@ -107,10 +108,10 @@ public class ChromaConfig {
         @Bean
         @Qualifier(ADVISORS_MAP)
         public Map<String, QuestionAnswerAdvisor> questionAnswerAdvisorMap(
-                        @Qualifier(OPENAI) QuestionAnswerAdvisor AIAdvisor,
+                        @Qualifier(MINNKOTA) QuestionAnswerAdvisor minnkotaAdvisor,
                         @Qualifier(EMPLOYEE_HANDBOOK) QuestionAnswerAdvisor employeeHandbookAdvisor) {
                 return Map.of(
-                        OPENAI, AIAdvisor,
+                                MINNKOTA, minnkotaAdvisor,
                                 EMPLOYEE_HANDBOOK, employeeHandbookAdvisor);
         }
 }

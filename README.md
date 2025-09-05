@@ -8,9 +8,22 @@ When running locally, you will need to create a tunnel to localhost:8080 -- I us
 
 `ngrok http http://localhost:8080` - this will produce a public URL you can use in your Slack Bot.
 
-This image shows how that configuration should look - also note the events that need to be subscribed to.
+Go to https://api.slack.com/app and Create New App.
+![alt text](images/slack-configuration0.png)
 
-![alt text](slack-configuration.png)
+Select OAuth & Permissions
+![alt text](images/slack-configuration1.png)
+
+Scroll down to Scopes
+![alt text](images/slack-configuration2.png)
+
+Next go to Event Subscription and enable it.
+Make sure the URL it formatted <ngrok URL>/slack/events
+Then Subscribe to bot Events to the following events
+![alt text](images/slack-configuration3.png)
+
+Install the bot
+![alt text](images/slack-configuration3.png)
 
 ## How to run
 
