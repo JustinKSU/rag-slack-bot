@@ -29,9 +29,6 @@ chroma-db:
   tenant-name: default_tenant
   database-name: default_database
   collections:
-    minnkota:
+    openai:
       prompt-refinements: Terrova-QUEST
-      # initialize-schema: false
-    employeehandbook:
-      prompt-refinements: keyhole
-      # initialize-schema: false
+      # initialize-schema:
