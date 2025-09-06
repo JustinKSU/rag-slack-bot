@@ -31,4 +31,4 @@ chroma-db:
   collections:
     openai:
       prompt-refinements: Terrova-QUEST
-      # initialize-schema:
+      initialize-schema: true
